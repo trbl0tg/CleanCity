@@ -16,7 +16,16 @@ public class Report {
     private Long id;
     private String reportName;
     private String reportDescription;
+
     @Enumerated(EnumType.STRING)
     private ReportType reportType;
 
+    public Report() {
+    }
+
+    public Report(String reportName, String reportDescription, ReportType reportType) {
+        this.reportName = reportName;
+        this.reportDescription = reportDescription;
+        this.reportType = reportType;
+    }
 }
