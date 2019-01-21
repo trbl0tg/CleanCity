@@ -2,19 +2,18 @@ package ua.legendarytec.CleanCity.domains.enums;
 
 import javax.persistence.Enumerated;
 
-public enum ReportType {
-    PLASTIC("PLASTIC"), GLASS("GLASS"), SCRAP_METAL("SCRAP_METAL"), MIXED("MIXED");
+public enum ReportType implements ReportEnumeration {
+    PLASTIC("Plastic"), GLASS("Glass"), SCRAP_METAL("Scrap metal"), BIOHAZARD("Biohazard"), MIXED("Mixed");
 
-    private String fullState;
-
-    private ReportType( String s )
+    private final String fullState;
+    ReportType(final String s )
     {
-        fullState = s;
+        this.fullState = s;
     }
-
     public String getFullState()
     {
         return fullState;
     }
+
 }
 

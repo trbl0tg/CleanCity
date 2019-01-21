@@ -12,7 +12,10 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/addreport">Add report <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/addreport">Add report <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/search">Search <span class="sr-only"></span></a>
             </li>
         </ul>
 

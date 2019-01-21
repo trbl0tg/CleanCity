@@ -16,9 +16,14 @@ public class Report {
     private Long id;
     private String reportName;
     private String reportDescription;
+    private String reportLocation;
 
     @Enumerated(EnumType.STRING)
     private ReportType reportType;
+
+    @Enumerated(EnumType.STRING)
+    private String reportStatus;
+
 
     public Report() {
     }
@@ -28,4 +33,7 @@ public class Report {
         this.reportDescription = reportDescription;
         this.reportType = reportType;
     }
+
 }
+
+

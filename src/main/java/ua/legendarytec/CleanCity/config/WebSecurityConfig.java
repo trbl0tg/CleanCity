@@ -1,26 +1,38 @@
 package ua.legendarytec.CleanCity.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import ua.legendarytec.CleanCity.domains.Role;
 import ua.legendarytec.CleanCity.domains.User;
 import ua.legendarytec.CleanCity.repos.UserDetailsRepo;
+
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+
+    @Autowired
+    private UserDetailsRepo userDetailsRepo;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/login**", "/webjars/**", "/error**").permitAll()
+                .antMatchers("/","/css/**", "/webjars/**", "/static/**", "/error**").permitAll()
                 .anyRequest().authenticated()
                     .and()
                 .logout().logoutSuccessUrl("/").permitAll()
@@ -28,8 +40,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/resources/**");
+    }
+
     @Bean
     public PrincipalExtractor principalExtractor(UserDetailsRepo userDetailsRepo) {
+
+
+
+
         return map -> {
             String id = (String) map.get("sub");
 
@@ -42,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 newUser.setGender((String) map.get("gender"));
                 newUser.setLocale((String) map.get("locale"));
                 newUser.setUserpic((String) map.get("picture"));
+                newUser.setActive(true);
 
                 return newUser;
             });

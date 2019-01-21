@@ -9,20 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.legendarytec.CleanCity.domains.Report;
 import ua.legendarytec.CleanCity.domains.User;
-import ua.legendarytec.CleanCity.domains.enums.ReportType;
-import ua.legendarytec.CleanCity.repos.reportRepo;
+import ua.legendarytec.CleanCity.repos.ReportRepo;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class MainController {
 
 
     @Autowired
-    private ua.legendarytec.CleanCity.repos.reportRepo reportRepo;
+    private ReportRepo reportRepo;
 
     @GetMapping
     public String main(Model model){
