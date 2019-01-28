@@ -2,6 +2,7 @@ package ua.legendarytec.CleanCity.domains;
 
 
 import lombok.Data;
+import ua.legendarytec.CleanCity.domains.enums.ReportStatus;
 import ua.legendarytec.CleanCity.domains.enums.ReportType;
 
 import javax.persistence.*;
@@ -22,8 +23,7 @@ public class Report {
     private ReportType reportType;
 
     @Enumerated(EnumType.STRING)
-    private String reportStatus;
-
+    private ReportStatus reportStatus;
 
     public Report() {
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.legendarytec.CleanCity.domains.Report;
+import ua.legendarytec.CleanCity.domains.enums.ReportStatus;
 import ua.legendarytec.CleanCity.domains.enums.ReportType;
 import ua.legendarytec.CleanCity.repos.ReportRepo;
 
@@ -28,16 +29,24 @@ public class ReportController {
         return "reports";
     }
 
+    @GetMapping("/map")
+    public String map(){
+
+        return "map";
+    }
+
     @PostMapping
     public String addReport(
             @RequestParam String reportName,
             @RequestParam String reportDescription,
             @RequestParam String reportType
     ){
+
         Report reportToDatabase = new Report();
         reportToDatabase.setReportName(reportName);
         reportToDatabase.setReportDescription(reportDescription);
 //        reportToDatabase.setReportType((ReportType) ReportUtils.getTypeOfReport(reportType));
+        reportToDatabase.setReportStatus(ReportStatus.UNDER_CONSIDERATION);
         reportToDatabase.setReportType(ReportType.valueOf(reportType));
 
         reportRepo.save(reportToDatabase);

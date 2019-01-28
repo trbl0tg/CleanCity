@@ -1,0 +1,26 @@
+<#include "parts/security.ftl">
+<#import "parts/common.ftl" as c>
+
+<@c.page>
+
+<button onclick="getLocation()" value="Get location"></button>
+<p>Your Location Details are Shown Below.</p>
+<p id="demo"></p>
+
+
+<script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+    }
+</script>
+</@c.page>
+

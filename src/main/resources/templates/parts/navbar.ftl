@@ -18,6 +18,11 @@
                 <a class="nav-link" href="/search">Search <span class="sr-only"></span></a>
             </li>
         </ul>
+    ${currentUserId}
+    ${isAdmin?c}
+
+        <#if isAdmin>
+        </#if>
 
         <#if isRegistrated>
             <span class="mx-4" style="color: #ffffff;">${name?if_exists}</span>
